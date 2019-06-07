@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NK BANKS | Dashboard</title>
+
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="../static/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+    <!-- Gritter -->
+    <link href="../static/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+    <link href="../static/css/animate.css" rel="stylesheet">
+    <link href="../static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element"> <span>
+                            <img alt="image" class="img-circle" src="../static/img/bank_small.jpg" style="width: 50px; height: 50px;" />
+                             </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ data["name"] }}</strong>
+                            </span></span></a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="profile.html">Profile</a></li>
+                                <li><a href="contacts.html">Contacts</a></li>
+                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li class="divider"></li>
+                                <li><a href="login.html">Logout</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            NK Banks
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a href="/index"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                    </li>
+
+                    <li>
+                        <a href="/withdraw"><i class="fa fa-money"></i> <span class="nav-label">Withdraw</span> </a>
+                    </li>
+                    <li>
+                        <a href="/transfer"><i class="fa fa-flask"></i> <span class="nav-label">Transfer</span></a>
+                    </li>
+                    <li>
+                        <a href="/changepassword"><i class="fa fa-eye"></i> <span class="nav-label">Change Password</span></a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+            <!--<form role="search" class="navbar-form-custom" action="search_results.html">-->
+                <!--<div class="form-group">-->
+                    <!--<input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">-->
+                <!--</div>-->
+            <!--</form>-->
+        </div>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message">Welcome, {{ data["username"] }}</span>
+                </li>
+                <li>
+                    <a href="/api/logout">
+                        <i class="fa fa-sign-out"></i> Log out
+                    </a>
+                </li>
+                <li>
+                    <a class="right-sidebar-toggle">
+                        <i class="fa fa-tasks"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-8">
+                    <h2>Invoice</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="active">
+                            <strong>Invoice</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-4">
+                    <div class="title-action">
+                        <a href="#" class="btn btn-primary" onclick="window.print();"><i class="fa fa-print"></i> Print Invoice </a>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+                    <div class="ibox-content p-xl">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h5>From:</h5>
+                                    <strong>{{ data["name"] }}</strong>
+                                    <address>
+                                        {{ data["address"] }}
+
+                                        <abbr title="Phone">P:</abbr> {{ data["phone"] }}
+                                    </address>
+                                </div>
+
+                                <div class="col-sm-6 text-right">
+                                    <h4>Invoice No.</h4>
+                                    <h4 class="text-navy">{{ data["trans"].get("_id") }}</h4>
+                                    <h4>Account Balance</h4>
+                                    <h4 class="text-navy">{{ data["account_balance"] }}</h4>
+                                    <h4>Amount</h4>
+                                    <h4 class="text-navy">{{ data["trans"].get("amount")}}</h4>
+                                    <h4>Transaction Type</h4>
+                                    <h4 class="text-navy">{{ data["trans"].get("type")}}</h4>
+                                    <span>To:</span>
+                                    <address>
+                                        <strong> Account ID: {{ data["trans"].get("transfer_to") }}</strong><br>
+                                    </address>
+                                    <p>
+                                        <span><strong>Invoice Date:</strong> {{ data["trans"].get("timestamp") }}</span><br/>
+                                    </p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="footer">-->
+            <!--<div class="pull-right">-->
+                <!--10GB of <strong>250GB</strong> Free.-->
+            <!--</div>-->
+            <!--<div>-->
+                <!--<strong>Copyright</strong> Example Company &copy; 2014-2015-->
+            <!--</div>-->
+        <!--</div>-->
+
+        </div>
+        </div>
+
+    <!-- Mainly scripts -->
+    <script src="../static/js/jquery-2.1.1.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="../static/js/inspinia.js"></script>
+    <script src="../static/js/plugins/pace/pace.min.js"></script>
+
+
+</body>
+
+</html>
